@@ -5,6 +5,7 @@
         </div>
         <div class="main">
             <el-button class="btn">Get random cocktail</el-button>
+            <slot></slot>
         </div>
     </div>
 </template>
@@ -27,16 +28,37 @@ const props = defineProps({
     background-color: $background;
 }
 
-.img{
-width: 50%;
-
-background-repeat: no-repeat;
-background-position: 50% 50%;
-background-size: cover;
-}
-
-.main{
+.img {
+    left: 0px;
+    top: 0px;
     width: 50%;
+
+    background-repeat: no-repeat;
+    background-position: start start;
+    background-size: 100% 100vh;
 }
 
+.main {
+    position: relative;
+    width: 50%;
+    padding: 32px 40px;
+}
+
+.btn {
+    position: absolute;
+    top: 32px;
+    right: 40px;
+
+    background-color: $accent;
+    border: unset;
+
+    font-family: $fontBase;
+    font-size: 16px;
+    color: $text;
+
+    &:hover,
+    &:active {
+        background-color: darken($accent, 15%);
+    }
+}
 </style>
