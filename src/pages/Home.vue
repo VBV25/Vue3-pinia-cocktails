@@ -1,12 +1,12 @@
 <template>
-    <AppLayout imgUrl="./src/assets/img/dawa-cocktail.png">
+    <AppLayout :imgUrl= "imgBgName" >
         <div class="wrapper">
             <div v-if="!ingredient || !cocktails" class="info">
                 <h2 class="title">Choose your drink</h2>
                 <div class="line"></div>
                 <div class="select-wrapper">
-                    <el-select v-model="ingredient" placeholder="Chose your drink" size="large" class="select"
-                        @change="getCocktails">
+                    <el-select v-model="rootStore.ingredient" placeholder="Choose main ingredient" size="large"
+                        filterable allow-create class="select" @change="getCocktails">
                         <el-option v-for="item in ingredients" :key="item.strIngredient1" :label="item.strIngredient1"
                             :value="item.strIngredient1" />
                     </el-select>
@@ -30,40 +30,29 @@
 
 <script setup>
 // Food_Drink.png
-
-import { ref } from 'vue';
+import { computed } from 'vue'
 import { useRootStore } from '@/stores/root';
 import { storeToRefs } from 'pinia'
 
 import AppLayout from '@/components/AppLayout.vue';
 import CocktailThumb from '@/components/CocktailThumb.vue';
 
-
 const rootStore = useRootStore()
+const { ingredients, ingredient, cocktails } = storeToRefs(rootStore)
+
 rootStore.getIngredients()
 
-const { ingredients, cocktails } = storeToRefs(rootStore)
-const ingredient = ref(null)
-
 function getCocktails() {
-    rootStore.getCocktails(ingredient.value)
+    rootStore.getCocktails(rootStore.ingredient)
 }
+
+const imgBgName = computed(() => {
+    return ingredient.value ? './src/assets/img/Food_Drink.png' : './src/assets/img/dawa-cocktail.png';
+});
 </script>
 
 <style lang="scss" scoped>
 @use '../assets/styles/main' as *;
-
-.wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.info {
-    width: 100%;
-    padding: 60px 0px 0px;
-    text-align: center;
-}
 
 .select-wrapper {
     padding-top: 50px;
@@ -97,7 +86,6 @@ function getCocktails() {
 
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     row-gap: 36px;
 
     &::-webkit-scrollbar {

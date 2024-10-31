@@ -18,6 +18,7 @@ body {
 
 a {
     color: inherit;
+    text-decoration: none;
 }
 
 .title {
@@ -32,4 +33,53 @@ a {
     height: 3px;
     margin: 32px auto 0;
     background-color: $accent;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info {
+    width: 100%;
+    padding: 60px 0px 0px;
+    text-align: center;
+}
+
+.list {
+    width: max-content;
+    margin: 0 auto;
+    padding: 50px 0px 80px;
+    text-align: left;
+
+    &-item {
+        position: relative;
+        margin-bottom: 20px;
+        padding-left: 20px;
+
+        &:last-child {
+            margin-bottom: 0px;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0px;
+            width: 6px;
+            height: 6px;
+            margin-top: -3px;
+            background-color: $text;
+        }
+    }
+}
+
+.instructions {
+    width: 516px;
+    margin: 0 auto;
+    font-size: 30px;
+    line-height: 30px;
+    letter-spacing: 0.1em;
+    color: $textMuted;
 }
