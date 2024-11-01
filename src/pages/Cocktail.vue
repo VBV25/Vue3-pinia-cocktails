@@ -50,6 +50,7 @@ async function getCocktail() {
     const data = await axios.get(`${COCKTAIL_BY_ID}${cocktailId.value}`)
     cocktail.value = data?.data?.drinks[0]
 }
+
 getCocktail()
 </script>
 

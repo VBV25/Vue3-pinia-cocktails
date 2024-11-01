@@ -1,9 +1,9 @@
 <template>
     <div class="root">
-        <RouterLink :to="`/cocktails/${cocktailData.idDrink}`">
+        <RouterLink :to="`/cocktails/${cocktailData.idDrink}`" class="cocktail-card">
             <div class="img" :style="`background-image: url(${cocktailData.strDrinkThumb})`"> </div>
+            <div class="name"> {{ cocktailData.strDrink }} </div>
         </RouterLink>
-        <div class="name"> {{ cocktailData.strDrink }} </div>
 
     </div>
 </template>
@@ -30,10 +30,16 @@ const props = defineProps({
     align-items: center;
 }
 
+.cocktail-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .img {
     width: 120px;
     height: 120px;
-
+    
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: cover;

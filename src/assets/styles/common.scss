@@ -14,6 +14,7 @@ body {
     font-style: normal;
     color: $text;
     overflow: hidden;
+    background-color: $background;
 }
 
 a {
@@ -21,7 +22,8 @@ a {
     text-decoration: none;
 }
 
-.title {
+.title {    
+    cursor: default;
     text-transform: uppercase;
     font-size: 32px;
     font-weight: 500;
@@ -50,12 +52,12 @@ a {
 .list {
     width: max-content;
     margin: 0 auto;
-    padding: 50px 0px 80px;
+    padding: 50px 0px 40px;
     text-align: left;
 
     &-item {
         position: relative;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         padding-left: 20px;
 
         &:last-child {
@@ -70,16 +72,27 @@ a {
             width: 6px;
             height: 6px;
             margin-top: -3px;
-            background-color: $text;
+            background-color: darken($accent, 30%);
         }
     }
 }
 
 .instructions {
+    cursor: default;
     width: 516px;
+    max-height: 250px;
     margin: 0 auto;
     font-size: 30px;
     line-height: 30px;
     letter-spacing: 0.1em;
     color: $textMuted;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar{
+        display: none;
+    }
+}
+
+.swiper-scrollbar-drag{
+    background: darken($accent, 40%) !important;
 }

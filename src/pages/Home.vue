@@ -1,5 +1,5 @@
 <template>
-    <AppLayout :imgUrl= "imgBgName" >
+    <AppLayout :imgUrl= "imgBgName" :backFunc="removeIngredient" :is-back-button-visible="!!ingredient">
         <div class="wrapper">
             <div v-if="!ingredient || !cocktails" class="info">
                 <h2 class="title">Choose your drink</h2>
@@ -29,7 +29,6 @@
 </template>
 
 <script setup>
-// Food_Drink.png
 import { computed } from 'vue'
 import { useRootStore } from '@/stores/root';
 import { storeToRefs } from 'pinia'
@@ -39,11 +38,14 @@ import CocktailThumb from '@/components/CocktailThumb.vue';
 
 const rootStore = useRootStore()
 const { ingredients, ingredient, cocktails } = storeToRefs(rootStore)
-
 rootStore.getIngredients()
 
 function getCocktails() {
     rootStore.getCocktails(rootStore.ingredient)
+}
+
+function removeIngredient(){
+    rootStore.setIngredient(null)
 }
 
 const imgBgName = computed(() => {
